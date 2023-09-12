@@ -1,0 +1,6 @@
+git branch -m main PROJECT
+git fetch origin
+git branch -u origin/PROJECT PROJECT
+git remote set-head origin -a	
+
+http://127.0.0.1:5500/<your_file_name>
