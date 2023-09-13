@@ -4,3 +4,9 @@ git branch -u origin/PROJECT PROJECT
 git remote set-head origin -a	
 
 http://127.0.0.1:5500/<your_file_name>
+
+Fri, Oct 6
+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
+
+Token classic
+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
