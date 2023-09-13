@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hai</title>
+</head>
+<body>
+    <header>
+        <h1>Praktek SIG-WEB</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <h2>Minggu 1</h2>
+            <p>Pembuatan web dengan HTML dan CSS</p>
+        </section>
+        <section>
+            <h2>Berikut profile saya</h2>
+            <img src="https://drive.google.com/file/d/1Y4TB8XJWhqE6Rc--TGZndPeND-Ub5AKG/view?usp=sharing" alt="My Picture">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 My Simple Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+ 
