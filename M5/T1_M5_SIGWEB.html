@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Geodesi UGM</title>
+    
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Include Leaflet Control Search CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-search/dist/leaflet.control.search.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh; /* Use 100vh for full viewport height */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Create a container for the map -->
+<div id="map"></div>
+
+<!-- Include Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<!-- Include Leaflet Control Search JavaScript -->
+<script src="https://unpkg.com/leaflet-control-search/dist/leaflet.control.search.min.js"></script>
+
+<script>
+    // Initialize the map
+    var myMap = L.map('map').setView([-7.7640365, 110.370083], 15); // Set the initial coordinates and zoom level
+
+    // Define base layers
+    var openStreetMapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+    });
+
+    // Add additional tile layers (you can add more as needed)
+    var otherTileLayer1 = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: 'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
+    });
+
+    var otherTileLayer2 = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',{
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
+    });
+
+    // Create a marker and add it to the map
+    var marker = L.marker([-7.7640365, 110.370083], { alt: 'Kyiv' }).addTo(myMap)
+    var popupContent = '<div style="text-align:center;">' +
+    '<img src="geodesi.jpg" alt="Image" style="max-width: 100%; height: auto;" />' +
+    '<p>Teknik Geodesi Universitas Gadjah Mada</p>' +
+    '</div>';
+    
+    marker.bindPopup(popupContent);
+
+    // Open the popup on mouseover (hover)
+    marker.on('mouseover', function () {
+    this.openPopup();
+    });
+
+    // Close the popup on mouseout (hover out)
+    marker.on('mouseout', function () {
+    this.closePopup();  
+    });
+
+
+    myMap.locate({ setView: true, maxZoom: 16 });
+
+    function onLocationFound(e) {
+        var radius = e.accuracy;
+
+        L.marker(e.latlng).addTo(myMap)
+            .bindPopup("kamu berada dalam radius " + radius + " meter dari titik ini").openPopup();
+        L.circle(e.latlng, radius).addTo(myMap);
+    }
+
+    myMap.on('locationfound', onLocationFound);
+
+    function onLocationError(e) {
+        alert(e.message);
+    }
+
+    myMap.on('locationerror', onLocationError);
+
+    // Create an object to hold the base layers
+    var baseLayers = {
+        "OpenStreetMap": openStreetMapLayer,
+        "OpenTopo": otherTileLayer1,
+        "OSMHot": otherTileLayer2
+    };
+
+    // Add a default base layer to the map
+    openStreetMapLayer.addTo(myMap);
+
+    // Create a Layers Control and add it to the map
+    var layerControl = L.control.layers(baseLayers, { "Geodesi": marker }).addTo(myMap);
+
+    
+    
+</script>
+
+</body>
+</html>
