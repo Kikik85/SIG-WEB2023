@@ -82,13 +82,11 @@
             .bindPopup("kamu berada dalam radius " + radius + " meter dari titik ini").openPopup();
         L.circle(e.latlng, radius).addTo(myMap);
     }
-
     myMap.on('locationfound', onLocationFound);
 
     function onLocationError(e) {
         alert(e.message);
     }
-
     myMap.on('locationerror', onLocationError);
 
     // Create an object to hold the base layers
